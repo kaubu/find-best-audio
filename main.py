@@ -1,48 +1,51 @@
 import os
+import time
+import pygame
 
 from itertools import combinations
-from playsound import playsound
+
+pygame.mixer.init()
 
 lists = [
     ["Test Vowels", {
-        "i": "\\sounds\\vowels\\i_Close_front_unrounded_vowel.ogg",
-        "y": "\\sounds\\vowels\\y_Close_front_rounded_vowel.ogg",
-        "ɨ": "\\sounds\\vowels\\ɨ_Close_central_unrounded_vowel.ogg",
+        "a": ".\\sounds\\vowels\\a_Open_front_unrounded_vowel.ogg",
+        "e": ".\\sounds\\vowels\\e_Close-mid_front_unrounded_vowel.ogg",
+        "e̞": ".\\sounds\\vowels\\e̞_Mid_front_unrounded_vowel.ogg",
     }],
     ["Vowels", {
-        "i": "\\sounds\\vowels\\i_Close_front_unrounded_vowel.ogg",
-        "y": "\\sounds\\vowels\\y_Close_front_rounded_vowel.ogg",
-        "ɨ": "\\sounds\\vowels\\ɨ_Close_central_unrounded_vowel.ogg",
-        "ʉ": "\\sounds\\vowels\\ʉ_Close_central_rounded_vowel.ogg",
-        "ɯ": "\\sounds\\vowels\\ɯ_Close_back_unrounded_vowel.ogg",
-        "u": "\\sounds\\vowels\\u_Close_back_rounded_vowel.ogg",
-        "ɪ": "\\sounds\\vowels\\ɪ_Near-close_near-front_unrounded_vowel.ogg",
-        "ʏ": "\\sounds\\vowels\\ʏ_Near-close_near-front_rounded_vowel.ogg",
-        "ʊ": "\\sounds\\vowels\\ʊ_Near-close_near-back_rounded_vowel.ogg",
-        "e": "\\sounds\\vowels\\e_Close-mid_front_unrounded_vowel.ogg",
-        "ø": "\\sounds\\vowels\\ø_Close-mid_front_rounded_vowel.ogg",
-        "ɘ": "\\sounds\\vowels\\ɘ_Close-mid_central_unrounded_vowel.ogg",
-        "ɵ": "\\sounds\\vowels\\ɵ_Close-mid_central_rounded_vowel.ogg",
-        "ɤ": "\\sounds\\vowels\\ɤ_Close-mid_back_unrounded_vowel.ogg",
-        "o": "\\sounds\\vowels\\o_Close-mid_back_rounded_vowel.ogg",
-        "e": "\\sounds\\vowels\\e̞_Mid_front_unrounded_vowel.ogg",
-        "ø": "\\sounds\\vowels\\ø̞_Mid_front_rounded_vowel.ogg",
-        "ə": "\\sounds\\vowels\\ə_Mid-central_vowel.ogg",
-        "o": "\\sounds\\vowels\\o̞_Mid_back_rounded_vowel.ogg",
-        "ɛ": "\\sounds\\vowels\\ɛ_Open-mid_front_unrounded_vowel.ogg",
-        "œ": "\\sounds\\vowels\\œ_Open-mid_front_rounded_vowel.ogg",
-        "ɜ": "\\sounds\\vowels\\ɜ_Open-mid_central_unrounded_vowel.ogg",
-        "ɞ": "\\sounds\\vowels\\ɞ_Open-mid_central_rounded_vowel.ogg",
-        "ʌ": "\\sounds\\vowels\\ʌ_Open-mid_back_unrounded_vowel2.ogg",
-        "ɔ": "\\sounds\\vowels\\ɔ_Open-mid_back_rounded_vowel.ogg",
-        "æ": "\\sounds\\vowels\\æ_Near-open_front_unrounded_vowel.ogg",
-        "ɐ": "\\sounds\\vowels\\ɐ_Near-open_central_unrounded_vowel.ogg",
-        "a": "\\sounds\\vowels\\a_Open_front_unrounded_vowel.ogg",
-        "ɶ": "\\sounds\\vowels\\ɶ_Open_front_rounded_vowel.ogg",
-        "ä": "\\sounds\\vowels\\ä_Open_central_unrounded_vowel.ogg",
-        "ɑ": "\\sounds\\vowels\\ɑ_Open_back_unrounded_vowel.ogg",
-        "ɒ": "\\sounds\\vowels\\ɒ_PR-open_back_rounded_vowel.ogg",
-        "ɤ": "\\sounds\\vowels\\ɤ̞_Mid_back_unrounded_vowel.ogg",
+        "a": ".\\sounds\\vowels\\a_Open_front_unrounded_vowel.ogg",
+        "e": ".\\sounds\\vowels\\e_Close-mid_front_unrounded_vowel.ogg",
+        "e̞": ".\\sounds\\vowels\\e̞_Mid_front_unrounded_vowel.ogg",
+        "i": ".\\sounds\\vowels\\i_Close_front_unrounded_vowel.ogg",
+        "o": ".\\sounds\\vowels\\o_Close-mid_back_rounded_vowel.ogg",
+        "o̞": ".\\sounds\\vowels\\o̞_Mid_back_rounded_vowel.ogg",
+        "u": ".\\sounds\\vowels\\u_Close_back_rounded_vowel.ogg",
+        "y": ".\\sounds\\vowels\\y_Close_front_rounded_vowel.ogg",
+        "ä": ".\\sounds\\vowels\\ä_Open_central_unrounded_vowel.ogg",
+        "æ": ".\\sounds\\vowels\\æ_Near-open_front_unrounded_vowel.ogg",
+        "ø": ".\\sounds\\vowels\\ø_Close-mid_front_rounded_vowel.ogg",
+        "ø̞": ".\\sounds\\vowels\\ø̞_Mid_front_rounded_vowel.ogg",
+        "œ": ".\\sounds\\vowels\\œ_Open-mid_front_rounded_vowel.ogg",
+        "ɐ": ".\\sounds\\vowels\\ɐ_Near-open_central_unrounded_vowel.ogg",
+        "ɑ": ".\\sounds\\vowels\\ɑ_Open_back_unrounded_vowel.ogg",
+        "ɒ": ".\\sounds\\vowels\\ɒ_PR-open_back_rounded_vowel.ogg",
+        "ɔ": ".\\sounds\\vowels\\ɔ_Open-mid_back_rounded_vowel.ogg",
+        "ɘ": ".\\sounds\\vowels\\ɘ_Close-mid_central_unrounded_vowel.ogg",
+        "ə": ".\\sounds\\vowels\\ə_Mid-central_vowel.ogg",
+        "ɛ": ".\\sounds\\vowels\\ɛ_Open-mid_front_unrounded_vowel.ogg",
+        "ɜ": ".\\sounds\\vowels\\ɜ_Open-mid_central_unrounded_vowel.ogg",
+        "ɞ": ".\\sounds\\vowels\\ɞ_Open-mid_central_rounded_vowel.ogg",
+        "ɤ": ".\\sounds\\vowels\\ɤ_Close-mid_back_unrounded_vowel.ogg",
+        "ɤ̞": ".\\sounds\\vowels\\ɤ̞_Mid_back_unrounded_vowel.ogg",
+        "ɨ": ".\\sounds\\vowels\\ɨ_Close_central_unrounded_vowel.ogg",
+        "ɪ": ".\\sounds\\vowels\\ɪ_Near-close_near-front_unrounded_vowel.ogg",
+        "ɯ": ".\\sounds\\vowels\\ɯ_Close_back_unrounded_vowel.ogg",
+        "ɵ": ".\\sounds\\vowels\\ɵ_Close-mid_central_rounded_vowel.ogg",
+        "ɶ": ".\\sounds\\vowels\\ɶ_Open_front_rounded_vowel.ogg",
+        "ʉ": ".\\sounds\\vowels\\ʉ_Close_central_rounded_vowel.ogg",
+        "ʊ": ".\\sounds\\vowels\\ʊ_Near-close_near-back_rounded_vowel.ogg",
+        "ʌ": ".\\sounds\\vowels\\ʌ_Open-mid_back_unrounded_vowel2.ogg",
+        "ʏ": ".\\sounds\\vowels\\ʏ_Near-close_near-front_rounded_vowel.ogg",
     }],
 ]
 
@@ -64,24 +67,19 @@ while True:
     selected_list = lists[selection]
     break
 
-# selected_set = set(selected_list[1])
-# selected_set = set([i[0] for i in selected_list[1]])
 selected_set = set(selected_list[1].keys())
 list_combinations = list(combinations(selected_set, 2))
 
 RANDOMIZE = True # Randomize the questions
-CLEAR_SCREEN = False # Clear screen after each question
+CLEAR_SCREEN = True # Clear screen after each question
 
 ##################### CHANGE THIS IN PROD
-DEBUG = True
+DEBUG = False
 #####################
 
 if RANDOMIZE:
     from random import shuffle
     shuffle(list_combinations)
-
-# if CLEAR_SCREEN:
-#     import os
 
 if DEBUG:
     for language in selected_list[1]:
@@ -91,8 +89,6 @@ if DEBUG:
     print(f"selected_list = \n===\n{selected_list}\n===")
     print(f"selected_set = \n===\n{selected_set}\n===")
     print(f"list_combinations = \n===\n{list_combinations}\n===")
-
-# print(list_combinations)
 
 questions_len = len(list_combinations)
 
@@ -109,51 +105,42 @@ for i, match_up in enumerate(list_combinations):
         print()
 
     while True:
+        sound_1 = selected_list[1][match_up[0]]
+        sound_2 = selected_list[1][match_up[1]]
+
+        pygame.mixer.music.load(sound_1)
         print("Playing sound 1…")
-        # playsound(match_up[0])
-        # match_up=('y', 'i')
+        pygame.mixer.music.play()
 
-# ['Test Vowels',
-#   [
-    #   ['i', './sounds/vowels/i_Close_front_unrounded_vowel.ogg'],
-    #   ['y', './sounds/vowels/y_Close_front_rounded_vowel.ogg'],
-    #   ['ɨ', './sounds/vowels/ɨ_Close_central_unrounded_vowel.ogg']
-#   ]
-# ]
+        time.sleep(1)
         
-        sound_1 = os.path.dirname(__file__) + selected_list[1][match_up[0]]
-        sound_2 = os.path.dirname(__file__) + selected_list[1][match_up[1]]
-        # sound_1 = "." + selected_list[1][match_up[0]]
-        # sound_2 = "." + selected_list[1][match_up[1]]
-        # sound_1 = selected_list[1][match_up[0]]
-        # sound_2 = selected_list[1][match_up[1]]
-
-        playsound(sound_1)
+        pygame.mixer.music.load(sound_2)
         print("Playing sound 2…")
-        playsound(sound_2)
-        # playsound(match_up[1])
+        pygame.mixer.music.play()
 
-        sound_loop = input("Play again (y) or continue (c or ENTER)? ")
+        sound_loop = input("Play again (p or ENTER) or continue (c)? ")
 
-        if sound_loop == "y":
+        if sound_loop == "p" or sound_loop == "":
             continue
-        elif sound_loop == "c" or sound_loop == "":
+        elif sound_loop == "c":
             break
          
     print(f"Which do you prefer? {i+1}/{questions_len}")
-    for i, match in enumerate(match_up[0]):
-        if DEBUG: print(f"[{i+1}] {match}") # Don't really need to do this, because
-                                            # it's fixed at two choices
-        print(f"[{i+1}] Sound {i+1}")
-    
-    left_choice = match_up[0][0]
-    right_choice = match_up[0][1]
+    for a, match in enumerate(match_up):
+        if DEBUG: print(f"debug: [{a+1}] {match}")
+                                        # Don't really need to do this, because
+                                        # it's fixed at two choices
+        print(f"[{a+1}] Sound {a+1}")
+
+    left_choice = match_up[0]
+    right_choice = match_up[1]
     
     while True:
         try:
             user_choice = int(input(">> "))
 
-            if user_choice == 1: # Left choice is better, and must be placed on top
+            # Left choice is better, and must be placed on top
+            if user_choice == 1:
                 winner = left_choice
                 loser = right_choice
             elif user_choice == 2:
@@ -180,7 +167,6 @@ for i, match_up in enumerate(list_combinations):
             ordered_list.insert(ordered_list.index(loser), winner)
         # If loser is lower, do nothing
     elif winner in ordered_list:    # If only the winner exists
-        # ordered_list.insert(ordered_list.index(winner)+1, loser)
         ordered_list.append(loser) # Add to the very end
     elif loser in ordered_list:     # If only the loser exists
         ordered_list.insert(ordered_list.index(loser), winner)

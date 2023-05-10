@@ -1,81 +1,49 @@
-from itertools import combinations
+import os
 
-# lists = [
-#     ["Living Languages", [
-#         "English\t\tThe man went to the store to get some lettuce.",
-#         "Mandarin\t\t那人去商店买些生菜。(Nà rén qù shāngdiàn mǎi xiē shēngcài.)",
-#         "Hindi\t\tवह आदमी कुछ सलाद लेने के लिए दुकान पर गया। (vah aadamee kuchh salaad lene ke lie dukaan par gaya.)",
-#         "Spanish\t\tEl hombre fue a la tienda a comprar lechuga.",
-#         "French\t\tL'homme est allé au magasin pour acheter de la laitue.",
-#         "Arabic\t\tذهب الرجل إلى المتجر ليأخذ بعض الخس. (dhahab alrajul 'iilaa almatjar liakhudh baed alkhasa.)",
-#         "Russian\t\tМужчина пошел в магазин за салатом. (Muzhchina poshel v magazin za salatom.)",
-#         "Indonesian\t\tPria itu pergi ke toko untuk membeli selada.",
-#         "German\t\tDer Mann ging in den Laden, um Salat zu holen.",
-#         "Japanese\t\t男はレタスを買いに店に行った。(Otoko wa retasu o kai ni mise ni itta.)",
-#         "Korean\t\t그 남자는 상추를 사러 가게에 갔다. (geu namjaneun sangchuleul saleo gagee gassda.)",
-#         "Italian\t\tL'uomo è andato al negozio per prendere della lattuga.",
-#         "Polish\t\tMężczyzna poszedł do sklepu po sałatę.",
-#         "Dutch\t\tDe man ging naar de winkel om wat sla te halen.",
-#         "Greek\t\tΟ άντρας πήγε στο μαγαζί να πάρει λίγο μαρούλι. (O ántras píge sto magazí na párei lígo maroúli.)",
-#         "Danish\t\tManden gik til butikken for at hente noget salat.",
-#     ]],
-#     ["Ancient Languages", [
-#         "Ancient Greek\tἀγεωμέτρητος μηδεὶς εἰσίτω. (Ageōmétrētos mēdeìs eisítō.)",
-#         "Egyptian\t\t𓂧𓆓𓈖𓆑 𓈃𓈖 𓅬𓆑 𓇓𓏏𓆤𓏏 𓉐𓄣𓋴𓈖 (d(m)ḏ.n.f tꜣ-wj n zꜣ.f nsw.t-bj.t(j) pr-jb.sn(j))",
-#         "Latin\t\tNihil tam absurde dici potest, quod non dicatur ab aliquo philosophorum.",
-#         "Old English\t\tIc bidde þe mara slawlice to sprecanne",
-#         "Middle English\tSumer is icumen in, lhude sing, cuccu! Groweþ sed and bloweþ med, and springþ þe wde nu!",
-#         "Old Norse\t\tElds er þörf, þeims inn er kominn ok á kné kalinn;",
-#         "Sanskrit\t\tतथा परयाते शिबिरं दरॊणपुत्रे महारथे (tathā prayāte śibiraṃ droṇaputre mahārathe)",
-#         "Sumerian\t\t𒀭𒂗𒆤 𒈗 𒆳𒆳𒊏 𒀊𒁀 𒀭𒀭𒌷𒉈𒆤 (den-lil2 lugal kur-kur-ra ab-ba dig̃ir-dig̃ir-re2-ne-ke4)",
-#     ]],
-#     ["Conlangs", [
-#         "Esperanto",
-#         "Ido",
-#     ]],
-# ]
+from itertools import combinations
+from playsound import playsound
 
 lists = [
-    ["Vowels", [
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-        ["ä"], ["sounds/vowels/ä_Open_central_unrounded_vowel.ogg"],
-    ]]
+    ["Test Vowels", {
+        "i": "\\sounds\\vowels\\i_Close_front_unrounded_vowel.ogg",
+        "y": "\\sounds\\vowels\\y_Close_front_rounded_vowel.ogg",
+        "ɨ": "\\sounds\\vowels\\ɨ_Close_central_unrounded_vowel.ogg",
+    }],
+    ["Vowels", {
+        "i": "\\sounds\\vowels\\i_Close_front_unrounded_vowel.ogg",
+        "y": "\\sounds\\vowels\\y_Close_front_rounded_vowel.ogg",
+        "ɨ": "\\sounds\\vowels\\ɨ_Close_central_unrounded_vowel.ogg",
+        "ʉ": "\\sounds\\vowels\\ʉ_Close_central_rounded_vowel.ogg",
+        "ɯ": "\\sounds\\vowels\\ɯ_Close_back_unrounded_vowel.ogg",
+        "u": "\\sounds\\vowels\\u_Close_back_rounded_vowel.ogg",
+        "ɪ": "\\sounds\\vowels\\ɪ_Near-close_near-front_unrounded_vowel.ogg",
+        "ʏ": "\\sounds\\vowels\\ʏ_Near-close_near-front_rounded_vowel.ogg",
+        "ʊ": "\\sounds\\vowels\\ʊ_Near-close_near-back_rounded_vowel.ogg",
+        "e": "\\sounds\\vowels\\e_Close-mid_front_unrounded_vowel.ogg",
+        "ø": "\\sounds\\vowels\\ø_Close-mid_front_rounded_vowel.ogg",
+        "ɘ": "\\sounds\\vowels\\ɘ_Close-mid_central_unrounded_vowel.ogg",
+        "ɵ": "\\sounds\\vowels\\ɵ_Close-mid_central_rounded_vowel.ogg",
+        "ɤ": "\\sounds\\vowels\\ɤ_Close-mid_back_unrounded_vowel.ogg",
+        "o": "\\sounds\\vowels\\o_Close-mid_back_rounded_vowel.ogg",
+        "e": "\\sounds\\vowels\\e̞_Mid_front_unrounded_vowel.ogg",
+        "ø": "\\sounds\\vowels\\ø̞_Mid_front_rounded_vowel.ogg",
+        "ə": "\\sounds\\vowels\\ə_Mid-central_vowel.ogg",
+        "o": "\\sounds\\vowels\\o̞_Mid_back_rounded_vowel.ogg",
+        "ɛ": "\\sounds\\vowels\\ɛ_Open-mid_front_unrounded_vowel.ogg",
+        "œ": "\\sounds\\vowels\\œ_Open-mid_front_rounded_vowel.ogg",
+        "ɜ": "\\sounds\\vowels\\ɜ_Open-mid_central_unrounded_vowel.ogg",
+        "ɞ": "\\sounds\\vowels\\ɞ_Open-mid_central_rounded_vowel.ogg",
+        "ʌ": "\\sounds\\vowels\\ʌ_Open-mid_back_unrounded_vowel2.ogg",
+        "ɔ": "\\sounds\\vowels\\ɔ_Open-mid_back_rounded_vowel.ogg",
+        "æ": "\\sounds\\vowels\\æ_Near-open_front_unrounded_vowel.ogg",
+        "ɐ": "\\sounds\\vowels\\ɐ_Near-open_central_unrounded_vowel.ogg",
+        "a": "\\sounds\\vowels\\a_Open_front_unrounded_vowel.ogg",
+        "ɶ": "\\sounds\\vowels\\ɶ_Open_front_rounded_vowel.ogg",
+        "ä": "\\sounds\\vowels\\ä_Open_central_unrounded_vowel.ogg",
+        "ɑ": "\\sounds\\vowels\\ɑ_Open_back_unrounded_vowel.ogg",
+        "ɒ": "\\sounds\\vowels\\ɒ_PR-open_back_rounded_vowel.ogg",
+        "ɤ": "\\sounds\\vowels\\ɤ̞_Mid_back_unrounded_vowel.ogg",
+    }],
 ]
 
 ordered_list = list()
@@ -96,30 +64,41 @@ while True:
     selected_list = lists[selection]
     break
 
-selected_set = set(selected_list[1])
+# selected_set = set(selected_list[1])
+# selected_set = set([i[0] for i in selected_list[1]])
+selected_set = set(selected_list[1].keys())
 list_combinations = list(combinations(selected_set, 2))
 
 RANDOMIZE = True # Randomize the questions
-CLEAR_SCREEN = True # Clear screen after each question
+CLEAR_SCREEN = False # Clear screen after each question
+
+##################### CHANGE THIS IN PROD
 DEBUG = True
+#####################
 
 if RANDOMIZE:
     from random import shuffle
     shuffle(list_combinations)
 
-if CLEAR_SCREEN:
-    import os
+# if CLEAR_SCREEN:
+#     import os
 
 if DEBUG:
     for language in selected_list[1]:
         print(f"[00] {language}")
     input("Continue?")
 
+    print(f"selected_list = \n===\n{selected_list}\n===")
+    print(f"selected_set = \n===\n{selected_set}\n===")
+    print(f"list_combinations = \n===\n{list_combinations}\n===")
+
 # print(list_combinations)
 
 questions_len = len(list_combinations)
 
 for i, match_up in enumerate(list_combinations):
+    if DEBUG: print(f"i={i}; match_up={match_up}")
+
     if CLEAR_SCREEN:
         os.system("cls" if os.name == "nt" else "clear")
     
@@ -129,13 +108,46 @@ for i, match_up in enumerate(list_combinations):
             print(f"#{i+1}: {item}")
         print()
 
+    while True:
+        print("Playing sound 1…")
+        # playsound(match_up[0])
+        # match_up=('y', 'i')
+
+# ['Test Vowels',
+#   [
+    #   ['i', './sounds/vowels/i_Close_front_unrounded_vowel.ogg'],
+    #   ['y', './sounds/vowels/y_Close_front_rounded_vowel.ogg'],
+    #   ['ɨ', './sounds/vowels/ɨ_Close_central_unrounded_vowel.ogg']
+#   ]
+# ]
+        
+        sound_1 = os.path.dirname(__file__) + selected_list[1][match_up[0]]
+        sound_2 = os.path.dirname(__file__) + selected_list[1][match_up[1]]
+        # sound_1 = "." + selected_list[1][match_up[0]]
+        # sound_2 = "." + selected_list[1][match_up[1]]
+        # sound_1 = selected_list[1][match_up[0]]
+        # sound_2 = selected_list[1][match_up[1]]
+
+        playsound(sound_1)
+        print("Playing sound 2…")
+        playsound(sound_2)
+        # playsound(match_up[1])
+
+        sound_loop = input("Play again (y) or continue (c or ENTER)? ")
+
+        if sound_loop == "y":
+            continue
+        elif sound_loop == "c" or sound_loop == "":
+            break
+         
     print(f"Which do you prefer? {i+1}/{questions_len}")
-    for i, match in enumerate(match_up):
-        print(f"[{i+1}] {match}") # Don't really need to do this, because
-                                        # it's fixed at two choices
+    for i, match in enumerate(match_up[0]):
+        if DEBUG: print(f"[{i+1}] {match}") # Don't really need to do this, because
+                                            # it's fixed at two choices
+        print(f"[{i+1}] Sound {i+1}")
     
-    left_choice = match_up[0]
-    right_choice = match_up[1]
+    left_choice = match_up[0][0]
+    right_choice = match_up[0][1]
     
     while True:
         try:

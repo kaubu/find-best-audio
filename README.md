@@ -1,2 +1,5 @@
-# find-best-elements
-A program designed to find the best elements of a list, according to user input.
+# find-best-audio
+A program designed to find the best elements of a list paired with a sound, according to user input.
+
+## Prerequisites
+Install `playsound` from pip.

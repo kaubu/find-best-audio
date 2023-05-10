@@ -1,7 +1,7 @@
 import os
-import pygame
-
 from itertools import combinations
+
+import pygame
 
 pygame.mixer.init()
 

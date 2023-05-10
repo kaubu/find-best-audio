@@ -111,8 +111,11 @@ for i, match_up in enumerate(list_combinations):
         pygame.mixer.music.load(sound_1)
         print("Playing sound 1…")
         pygame.mixer.music.play()
-
-        time.sleep(1)
+        
+        # Wait until the first sound has finished
+        while pygame.mixer.music.get_busy():
+            continue
+        # time.sleep(1)
         
         pygame.mixer.music.load(sound_2)
         print("Playing sound 2…")
